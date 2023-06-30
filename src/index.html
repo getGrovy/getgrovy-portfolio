@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        #container {
+            position: fixed;
+            width: 100vmax;
+            height: 100vmax;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -40%, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <header id="header">
+        <h1>portfolio</h1>
+        <span>GETGROVY</span>
+    </header>
+    <!-- //header -->
+
+    <div id="contents">
+        <section id="section1" class="section">
+            <div class="text-wrap">
+                <div class="write"><span class="ti1 split">GETGROVY</span></div>
+                <div class="write"><span class="ti2 split">FRONT & BACK</span></div>
+                <div class="write"><span class="ti3 split">FAITHFUL</span></div>
+                <div class="write"><span class="ti4 split">PROGRAMGER</span></div>
+                <div class="write"><span class="ti5 split">GETGROVY</span></div>
+                <div class="parallaxs__item__img"></div>
+
+            </div>
+            <div class="section-title">
+                <span>about me about me about me about me about me about me about me about me about me about me about me
+                    about me about me about me about me about me about me about me about me about me about me about me
+                    about me about me about me</span>
+                <div class="circle">
+                    <p>about me</p>
+                </div>
+            </div>
+        </section>
+        <!-- //section1 -->
+
+        <section id="section2" class="section">
+            <div class="myInfo">
+                <div class="img"></div>
+                <div class="desc">
+                    <div class="eng">
+                        <h2>GETGROVY</h2>
+                        <span>MY MOTTO IS</span><br>
+                        <span> IF YOU DO NOT WALK TODAY, </span><br>
+                        <span>YOU WILL HAVE TO RUN T OMMORROW </span><br>
+                        <span>I WORKED AS A PROGRAMMER</span><br>
+                        <span>FOR 3YEARS IN THE PAST.</span><br>
+                        <span>AND HE IS CUTE SINCE BORN</span>
+                    </div>
+                    <div class="kor">
+                        <span>비전공자인 저에게 프로그래밍은 거리가 있었지만.</span><br>
+                        <span>주변의 컴공과 지인들이 넌 수학을 잘했으니 개발자 어때? </span><br>
+                        <span>라는 권유로 인해 시작하게된 프로그래밍이였지만 코드를 짜면서</span><br>
+                        <span>재미를 느꼈습니다. 코딩을 백앤드개발자가 되어 3년정도 근무 했습니다.</span><br>
+                        <span>그뒤 개인사업을 하며 잊었던 프로그래밍에 다시흥미를 느껴 다시 시작했습니다.</span><br>
+                        <span>백엔드 뿐만 아닌 프론트 기반의 전반적인것에 관심을 가지고 개발을 하고있습니다. </span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title">
+                <span>WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD
+                    WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD
+                    WEBSTANDARD WEBSTANDARD WEBSTANDARD WEBSTANDARD </span>
+                <div class="circle">
+                    <p class="circle__desc">WEB<br>STANDARD</p>
+
+                </div>
+            </div>
+        </section>
+        <!-- //section2 -->
+        <section id="section3" class="section">3</section>
+        <section id="section4" class="section">4</section>
+        <section id="section5" class="section">5</section>
+        <section id="section6" class="section">6</section>
+        <section id="section7" class="section">7</section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+            // console.log(e)
+        })
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf);
+
+
+        let bg = gsap.timeline({
+            scrollTrigger: {
+                start: 0,
+                end: "max",
+                scrub: true,
+            }
+        })
+        bg.to("body", { "--bg-color": "#DBCCB2" })
+            .to("body", { "--bg-color": "#463415" })
+            .to("body", { "--bg-color": "#DBCCB2" });
+
+        const horizontal = document.querySelector("#contents");
+        let sections = gsap.utils.toArray(".section");
+        gsap.to(sections, {
+            x: -(horizontal.offsetWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#contents",
+                pin: true,
+                anticipatePin: 1,
+                scrub: 1,
+                end: () => "+=" + (horizontal.offsetWidth - window.innerWidth),
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            location.reload();
+        })
+
+
+        //글씨 분리하기
+        document.querySelectorAll('.split').forEach(desc => {
+            let splitText = desc.innerText;
+            let splitWrap = splitText.split('').join("</span><span aria-hidden='true'>");
+            splitWrap = "<span aria-hidden='true'>" + splitWrap + "</span>";
+            desc.innerHTML = splitWrap;
+            desc.setAttribute("aria-label", splitText);
+            // console.log(splitText);
+            // console.log(splitWrap);
+        });
+
+        gsap.set(".ti1 span", { opacity: 0, x: 100, y: 80, display: "inline-block", minWidth: "1.4vw" });
+        gsap.set(".ti2 span", { opacity: 0, x: 100, y: 80, display: "inline-block", minWidth: "1.4vw" });
+        gsap.set(".ti3 span", { opacity: 0, x: 100, y: 100, display: "inline-block", minWidth: "1.4vw" });
+        gsap.set(".ti4 span", { opacity: 0, x: 100, y: 120, display: "inline-block", minWidth: "1.4vw" });
+        gsap.set(".ti5 span", { opacity: 0, x: 100, y: 140, display: "inline-block", minWidth: "1.4vw" });
+        gsap.set("#section1 .parallaxs__item__img", { scale: 0, transformOrigin: "center" });
+
+        function animateText() {
+            let tl = gsap.timeline();
+            tl.to(".ti1 span", {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, 'title');
+            tl.to(".ti2 span", {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, 'title');
+            tl.to(".ti3 span", {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, 'title');
+            tl.to(".ti4 span", {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, 'title');
+            tl.to(".ti5 span", {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, 'title'); // Call the function after the animation completes;
+
+        }
+        //위함수의 콜백함수
+        animateText();
+
+        window.addEventListener('scroll', handleScroll);
+        // 스크롤 이벤트 핸들러
+        function handleScroll() {
+            // 현재 스크롤 위치 계산
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // 애니메이션 처리
+            gsap.to('.section-title span', {
+                y: scrollTop * -0.3, // 움직임의 정도를 조절합니다.
+                duration: 0.1 // 애니메이션 지속 시간을 조절합니다.
+            });
+        }
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, ribbon
+        const container = document.querySelector('#container')
+        const init = () => {
+            scene = new THREE.Scene()
+            camera = new THREE.PerspectiveCamera(75, 1, 0.1, 10000)
+            camera.position.z = 2
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+            container.appendChild(renderer.domElement)
+
+            ribbon = new THREE.Mesh(
+                new THREE.PlaneGeometry(1, 1, 128, 128),
+                new THREE.ShaderMaterial({
+                    uniforms: { time: { value: 1.0 }, },
+                    vertexShader: `
+                        varying vec3 vEC;
+                        uniform float time;
+
+                        float iqhash(float n) {
+                            return fract(sin(n) * 43758.5453);
+                        }
+
+                        float noise(vec3 x) {
+                            vec3 p = floor(x);
+                            vec3 f = fract(x);
+                            f = f * f * (3.0 - 2.0 * f);
+                            float n = p.x + p.y * 57.0 + 113.0 * p.z;
+                            return mix(mix(mix(iqhash(n), iqhash(n + 1.0), f.x),
+                                    mix(iqhash(n + 57.0), iqhash(n + 58.0), f.x), f.y),
+                                    mix(mix(iqhash(n + 113.0), iqhash(n + 114.0), f.x),
+                                    mix(iqhash(n + 170.0), iqhash(n + 171.0), f.x), f.y), f.z);
+                        }
+
+                        float xmb_noise2(vec3 x) {
+                            return cos(x.z * 4.0) * cos(x.z + time / 10.0 + x.x);
+                        }
+
+                        void main() {
+                        vec4 pos = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        vec3 v = vec3(pos.x, 0.0, pos.y);
+                        vec3 v2 = v;
+                        vec3 v3 = v;
+
+                        v.y = xmb_noise2(v2) / 8.0;
+
+                        v3.x -= time / 5.0;
+                        v3.x /= 4.0;
+
+                        v3.z -= time / 10.0;
+                        v3.y -= time / 100.0;
+
+                        v.z -= noise(v3 * 7.0) / 15.0;
+                        v.y -= noise(v3 * 7.0) / 15.0 + cos(v.x * 2.0 - time / 2.0) / 5.0 - 0.3;
+
+                        vEC = v;
+                            gl_Position = vec4(v, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform float time;
+                        varying vec3 vEC;
+
+                        void main()
+                        {
+                        const vec3 up = vec3(0.0, 0.0, 1.0);
+                        vec3 x = dFdx(vEC);
+                        vec3 y = dFdy(vEC);
+                        vec3 normal = normalize(cross(x, y));
+                        float c = 1.0 - dot(normal, up);
+                        c = (1.0 - cos(c * c)) / 3.0;
+                        gl_FragColor = vec4(1.0, 1.0, 1.0, c * 1.5);
+                        }
+                    `,
+                    extensions: {
+                        derivatives: true,
+                        fragDepth: false,
+                        drawBuffers: false,
+                        shaderTextureLOD: false
+                    },
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    depthTest: false,
+                })
+            )
+            scene.add(ribbon)
+
+            resize()
+            window.addEventListener('resize', resize)
+        }
+
+
+        const resize = () => {
+            const {
+                offsetWidth,
+                offsetHeight
+            } = container
+
+            renderer.setSize(offsetWidth, offsetHeight)
+            renderer.setPixelRatio(devicePixelRatio)
+
+            camera.aspect = offsetWidth / offsetHeight
+            camera.updateProjectionMatrix()
+
+            ribbon.scale.set(camera.aspect * 1.55, 0.75, 1)
+        }
+
+        const animate = () => {
+            ribbon.material.uniforms.time.value += 0.01
+            renderer.render(scene, camera)
+            requestAnimationFrame(() => animate())
+        }
+
+        init()
+        animate()
+    </script>
+</body>
+
+</html>
